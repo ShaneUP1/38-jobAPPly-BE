@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS jobs;
+
+CREATE TABLE jobs (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  company TEXT NOT NULL,
+  applied_date TEXT NOT NULL,
+  response_date TEXT,
+  url TEXT NOT NULL,
+  notes TEXT
+);
