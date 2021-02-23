@@ -13,7 +13,7 @@ describe('jobAPPly-BE routes', () => {
       .post('/api/v1/jobs')
       .send({ 
         company: 'Imperfect Foods',
-        applied_date: '02/20/21',
+        applied_date: '02/20/2021',
         response_date: '',
         url: 'www.imperfectfoods.com',
         notes: '' })
@@ -21,7 +21,7 @@ describe('jobAPPly-BE routes', () => {
         expect(res.body).toEqual({
           id: '1',
           company: 'Imperfect Foods',
-          appliedDate: '02/20/21',
+          appliedDate: '02/20/2021',
           responseDate: '',
           url: 'www.imperfectfoods.com',
           notes: ''
