@@ -8,6 +8,9 @@ describe('jobAPPly-BE routes', () => {
   beforeEach(() => {
     return pool.query(fs.readFileSync('./sql/setup.sql', 'utf-8'));
   });
+  afterAll(() => {
+    return pool.end();
+  });
 
   it('creates a job via POST', async() => {
     return await request(app)
@@ -54,5 +57,20 @@ describe('jobAPPly-BE routes', () => {
 
     expect(response.body).toEqual(expect.arrayContaining(postLinks));
     expect(response.body).toHaveLength(postLinks.length);
+  });
+
+  it('returns a job posting by id', async() => {
+    const newJob = await Job.insert({ 
+      company: 'Imperfect Foods',
+      appliedDate: '02/20/2021',
+      responseDate: '',
+      url: 'www.imperfectfoods.com',
+      notes: '' });
+
+
+    const res = await request(app)
+      .get(`/api/v1/jobs/update/${newJob.id}`);
+     
+    expect(res.body).toEqual(newJob);
   });
 });
