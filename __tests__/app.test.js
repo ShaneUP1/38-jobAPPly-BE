@@ -67,10 +67,37 @@ describe('jobAPPly-BE routes', () => {
       url: 'www.imperfectfoods.com',
       notes: '' });
 
-
     const res = await request(app)
       .get(`/api/v1/jobs/update/${newJob.id}`);
      
     expect(res.body).toEqual(newJob);
+  });
+
+  it('updates a job posting', async() => {
+    const newJob = await Job.insert({ 
+      company: 'Imperfect Foods',
+      appliedDate: '02/20/2021',
+      responseDate: '',
+      url: 'www.imperfectfoods.com',
+      notes: '' });
+
+    const res = await request(app)
+      .put(`/api/v1/jobs/update/${newJob.id}`)
+      .send({
+        company: 'Imperfect Foods',
+        appliedDate: '02/20/2021',
+        responseDate: '02/25/2021',
+        url: 'www.imperfectfoods.com',
+        notes: 'interview date set - 03/01/2021'
+      });
+
+    expect(res.body).toEqual({
+      id: `${newJob.id}`,
+      company: 'Imperfect Foods',
+      appliedDate: '02/20/2021',
+      responseDate: '02/25/2021',
+      url: 'www.imperfectfoods.com',
+      notes: 'interview date set - 03/01/2021'
+    });
   });
 });
