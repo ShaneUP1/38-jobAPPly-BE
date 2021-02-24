@@ -8,3 +8,9 @@ CREATE TABLE jobs (
   url TEXT NOT NULL,
   notes TEXT
 );
+
+CREATE TABLE users(
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  email TEXT NOT NULL,
+  password_hash TEXT NOT NULL
+);
